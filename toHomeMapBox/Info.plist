@@ -26,6 +26,10 @@
 	<string>pk.eyJ1IjoiY2hyaXNkYW5iZyIsImEiOiJjamgzajRoNzUwZmtyMnhtcnNvMzZra3pkIn0.idaBkNna1DmUwem9j5zAgw</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Shows your location on the map and helps improve OpenStreetMap.</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
