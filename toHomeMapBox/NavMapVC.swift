@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import Mapbox
 import MapboxCoreNavigation
 import MapboxDirections
@@ -30,11 +31,12 @@ extension State {
 class NavMapVC: UIViewController, MGLMapViewDelegate {
     var mapView: NavigationMapView!
     var directionsRoute: Route?
-    var label: UILabel!
     
     var homeLocation = CLLocationCoordinate2D()
     var newHomeLocation = CLLocationCoordinate2D()
     var disneyLocation = CLLocationCoordinate2DMake(37.8014548, -122.4586558)
+    
+    
     
     private let popupOffset: CGFloat = 440
     private let offset: CGFloat = 150
@@ -43,25 +45,28 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         mapView = NavigationMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
         
         mapView.delegate = self
         
-        // Annotations
-      
-  
-        mapView.setUserTrackingMode(.follow
-            , animated: true)
-        view.addSubview(mapView)
         mapView.showsUserLocation = true
-        
+        mapView.setUserTrackingMode(.none, animated: false)
+        view.addSubview(mapView)
+       
+        let myHomeDestination = loadCoordinates()
+
         layout()
+        mapView.layoutSubviews()
         /// Load Gesture Recognizers
         littleView.addGestureRecognizer(littlepanRecognizer)
         popupView.addGestureRecognizer(panRecognizer)
         setHomeButton.addGestureRecognizer(setHomeRecognizer)
     }
+    
+    
+    
     
     // Views
     
@@ -74,7 +79,16 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         view.layer.shadowRadius = 10
         return view
     }()
-    
+    private lazy var whiteView: UIView = {
+        let view = UIView ()
+        view.backgroundColor = .white
+        view.layer.shadowOpacity = 0.4
+        view.layer.shadowRadius = 10
+        view.layer.cornerRadius = 20.0
+        view.alpha = 1
+        view.layer.masksToBounds = true
+        return view
+    }()
     
     private lazy var littleView: UIView = {
         let view = UIView ()
@@ -121,7 +135,25 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         return label
     }()
     
-    private lazy var setHomeButton: UIButton = {
+    private lazy var navigateHomeButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: (view.frame.width/2) - 100, y: view.frame.height + 160, width:200, height: 50))
+        button.setTitle("Take Me Home", for: .normal)
+        button.alpha = 0
+        button.layer.cornerRadius = 20.0
+        button.clipsToBounds = true
+        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.layer.shadowOffset = CGSize(width: 0, height: 10)
+        button.layer.shadowColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
+        button.layer.shadowRadius = 5
+        button.layer.shadowOpacity = 0.3
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(calloutNavigationView), for: .touchUpInside)
+        
+        return button
+    }()
+    
+    private lazy var setHomeButton: UIButton!  = {
         let newbutton = UIButton()
         newbutton.setTitle("Set Pin As Your Home", for: .normal)
         newbutton.layer.cornerRadius = 20.0
@@ -132,24 +164,52 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         newbutton.addTarget(self, action: #selector(setNewHome), for: .touchUpInside)
         return newbutton
     }()
-    func layout() {
-        let toHomeButton: UIButton = {
-            let button = UIButton(frame: CGRect(x: (view.frame.width/2) - 100, y: view.frame.height - 75, width:200, height: 50))
-            button.setTitle("To Home", for: .normal)
-            button.layer.cornerRadius = 20.0
-            button.clipsToBounds = true
-            button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
-            button.layer.shadowOffset = CGSize(width: 0, height: 10)
-            button.layer.shadowColor = #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)
-            button.layer.shadowRadius = 5
-            button.layer.shadowOpacity = 0.3
-            button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 18)
-            button.showsTouchWhenHighlighted = true
-            button.addTarget(self, action: #selector(takeMeHome), for: .touchUpInside)
-            return button
-        }()
-        mapView.addSubview(toHomeButton)
+    
+    
+    private lazy var welcomeLbl: UILabel = {
+        let welcomeLbl = UILabel(frame: CGRect(x: (view.frame.width/2) - 100, y: (view.frame.height/2) - 350, width: 500, height: 200))
+        welcomeLbl.text = "Hello!"
+        welcomeLbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        welcomeLbl.font = UIFont(name: "AvenirNext-Bold", size: 72)
+        return welcomeLbl
+    }()
+    
+    private lazy var toHomeButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: (view.frame.width/2) - 100, y: (view.frame.height/2) - 100, width: 200, height: 200))
+        button.setTitle("To Home", for: .normal)
+        button.layer.cornerRadius = button.frame.width / 2
+        button.clipsToBounds = true
+        button.backgroundColor = #colorLiteral(red: 0.9529411793, green: 0.6862745285, blue: 0.1333333403, alpha: 1)
+        button.layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        button.layer.shadowOpacity = 0.4
+        button.layer.shadowRadius = 0.0
+        button.layer.masksToBounds = false
+        button.titleLabel?.font = UIFont(name: "AvenirNext-Bold", size: 25)
+        button.showsTouchWhenHighlighted = true
+        button.addTarget(self, action: #selector(takeMeHome), for: .touchUpInside)
+  
+        button.isUserInteractionEnabled = true
+        button.isEnabled = true
         
+        let pulse1 = CASpringAnimation(keyPath: "transform.scale")
+        pulse1.duration = 2
+        pulse1.fromValue = 1.0
+        pulse1.toValue = 1.2
+        pulse1.autoreverses = true
+        pulse1.repeatCount = 0
+        pulse1.initialVelocity = 10
+        pulse1.damping = 9
+        
+        let animationGroup = CAAnimationGroup()
+        animationGroup.duration = 6
+        animationGroup.repeatCount = 1000
+        animationGroup.animations = [pulse1]
+        
+        button.layer.add(animationGroup, forKey: "pulse")
+        
+        return button
+    }()
+    func layout() {
         littleView.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(littleView)
         littleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -15).isActive = true
@@ -157,13 +217,27 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         bottomConstraint.isActive = true
         littleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         littleView.widthAnchor.constraint(equalToConstant: 75).isActive = true
-    
+        
+        whiteView.translatesAutoresizingMaskIntoConstraints = false
+        mapView.addSubview(whiteView)
+       
+        whiteView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        bottomConstraint = whiteView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        bottomConstraint.isActive = true
+        whiteView.heightAnchor.constraint(equalToConstant: 800).isActive = true
+        whiteView.widthAnchor.constraint(equalToConstant: 500).isActive = true
+        
+        mapView.addSubview(toHomeButton)
+        mapView.addSubview(welcomeLbl)
+        mapView.addSubview(navigateHomeButton)
+        
         setHomeButton.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(setHomeButton)
         setHomeButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 60).isActive = true
         setHomeButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -60).isActive = true
         setHomeButton.bottomAnchor.constraint(equalTo: popupView.bottomAnchor, constant: -370).isActive = true
         setHomeButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        
         
         overlayView.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(overlayView)
@@ -197,13 +271,14 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
   
     
     func calculateRoute(from originCoor:CLLocationCoordinate2D, to destinationCoor: CLLocationCoordinate2D, completion: @escaping (Route?, Error?) -> Void) {
-        let origin = Waypoint(coordinate: originCoor, coordinateAccuracy: -1, name: "Start")
-        let destination = Waypoint(coordinate: destinationCoor, coordinateAccuracy: -1, name: "Finish")
+        let myHomeDestination = loadCoordinates()
+        let origin = Waypoint(coordinate: originCoor, coordinateAccuracy: -10, name: "Start")
+        let destination = Waypoint(coordinate: myHomeDestination![0], coordinateAccuracy: -1, name: "Finish")
         let options = NavigationRouteOptions(waypoints: [origin,destination], profileIdentifier: .automobileAvoidingTraffic )
         
         _ = Directions.shared.calculate(options, completionHandler: { (waypoints, route, error) in
             self.directionsRoute = route?.first
-            self.drawLine(route: self.directionsRoute!)
+            self.drawLine(route: (self.directionsRoute!))
             
             let coordinateBounds = MGLCoordinateBounds(sw: destinationCoor, ne: originCoor)
             let insets = UIEdgeInsetsMake(50, 50, 50, 50)
@@ -232,24 +307,10 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
     }
     
         @objc func setNewHome(sender: UIButton!) {
-           // newHomeLocation = homeLocation
-            //storeCoordinates([newHomeLocation])
-            self.calloutNavigationView()
-            
+            newHomeLocation = (mapView.userLocation?.coordinate)!
+            storeCoordinates([newHomeLocation])
         }
-    
-    @objc func buttonAction(sender: UIButton!) {
-        UIView.animate(withDuration: 0.6,
-                       animations: {
-                  //      self.toHomeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
-        },
-                       completion: { _ in
-                        UIView.animate(withDuration: 0.6) {
-                       //     self.toHomeButton.transform = CGAffineTransform.identity
-                        }
-        })
-    }
-    
+
     func storeCoordinates(_ coordinates: [CLLocationCoordinate2D]) {
         let locations = coordinates.map { coordinate -> CLLocation in
             return CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude)
@@ -273,22 +334,47 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
 }
     
     @objc func takeMeHome(sender: UIButton!) {
+
+        UIView.animate(withDuration: 1,
+                       animations: {
+                        self.whiteView.alpha = 0
+                        self.navigateHomeButton.alpha = 0.6
+                        self.toHomeButton.transform = (CGAffineTransform(translationX: 0, y: +300))
+                        self.toHomeButton.alpha = 0
+                        self.welcomeLbl.transform = (CGAffineTransform(translationX: 0, y: -200))
+                        self.welcomeLbl.alpha = 0
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 1) {
+                            self.whiteView.alpha = 0
+                            self.navigateHomeButton.alpha = 1
+                            self.navigateHomeButton.transform = (CGAffineTransform(translationX: 0, y: -240))
+        }
+        })
+        
+        ////////////////////////
+        
         let myHomeDestination = loadCoordinates()
         let currentLocation = mapView.userLocation!.coordinate
-        calculateRoute(from: currentLocation, to: disneyLocation) { (route, error) in
-            
+        calculateRoute(from: currentLocation, to: myHomeDestination![0]) { (route, error) in
             if error != nil {
                 print("Error occured")
             }
         }
-        TimeRemainingLabel.appearance().isHidden = false
     }
-
-    
-    func calloutNavigationView(){
-        let navigateToRoute = directionsRoute!
-        let navigationVC = NavigationViewController(for: navigateToRoute)
-        self.present(navigationVC , animated: true, completion: nil)
+    @objc func calloutNavigationView(){
+            let navigateToRoute = self.directionsRoute!
+            let navigationVC = NavigationViewController(for: navigateToRoute)
+            self.present(navigationVC , animated: true, completion: nil)
+        UIView.animate(withDuration: 0.6,
+                       animations: {
+                        self.navigateHomeButton.transform = CGAffineTransform(scaleX: 0.6, y: 0.6)
+        },
+                       completion: { _ in
+                        UIView.animate(withDuration: 0.6) {
+                        self.navigateHomeButton.transform = CGAffineTransform.identity
+                        }
+        })
     }
 
     /// Pan Animation

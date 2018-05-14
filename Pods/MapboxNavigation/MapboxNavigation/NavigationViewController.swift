@@ -6,6 +6,10 @@ import Mapbox
 /**
  The `NavigationViewControllerDelegate` provides methods for configuring the map view shown by a `NavigationViewController` and responding to the cancellation of a navigation session.
  */
+func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    return nil
+}
+
 @objc(MBNavigationViewControllerDelegate)
 public protocol NavigationViewControllerDelegate {
     /**
