@@ -13,13 +13,13 @@ import MapboxCoreNavigation
 import MapboxDirections
 import MapboxNavigation
 
+import LTMorphingLabel
 import UIKit.UIGestureRecognizerSubclass
 
 private enum State {
     case closed
     case open
 }
-
 extension State {
     var opposite: State {
         switch self {
@@ -28,6 +28,7 @@ extension State {
         }
     }
 }
+@IBDesignable
 class NavMapVC: UIViewController, MGLMapViewDelegate {
     var mapView: NavigationMapView!
     var directionsRoute: Route?
@@ -45,30 +46,38 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         mapView = NavigationMapView(frame: view.bounds)
         mapView.autoresizingMask = [.flexibleWidth,.flexibleHeight]
-        
         mapView.delegate = self
-        
         mapView.showsUserLocation = true
         mapView.setUserTrackingMode(.none, animated: false)
-        view.addSubview(mapView)
-       
-        let myHomeDestination = loadCoordinates()
-
-        layout()
         mapView.layoutSubviews()
+        view.addSubview(mapView)
+        
+        //let myHomeDestination = loadCoordinates()
+        layout()
+        
         /// Load Gesture Recognizers
         littleView.addGestureRecognizer(littlepanRecognizer)
         popupView.addGestureRecognizer(panRecognizer)
         setHomeButton.addGestureRecognizer(setHomeRecognizer)
     }
-    
+    override func viewDidAppear(_ animated: Bool) {
+        whiteView.addSubview(welcomeLbl)
+        UIView.animate(withDuration: 2) {
+            self.welcomeLbl.alpha = 1
+            self.welcomeLbl.transform = (CGAffineTransform(translationX: 0, y: -150))
+        }
+    }
     
     
     
     // Views
+    private lazy var houseImg: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "home-icon-silhouette")
+        return imageView
+    }()
     
     private lazy var popupView: UIView = {
         let view = UIView()
@@ -109,11 +118,6 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         return view
     }()
     
-    private lazy var arrowImg: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "home-icon-silhouette")
-        return imageView
-    }()
     
     private lazy var closedTitleLabel: UILabel = {
         let label = UILabel()
@@ -167,10 +171,15 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
     
     
     private lazy var welcomeLbl: UILabel = {
-        let welcomeLbl = UILabel(frame: CGRect(x: (view.frame.width/2) - 100, y: (view.frame.height/2) - 350, width: 500, height: 200))
-        welcomeLbl.text = "Hello!"
+        let welcomeLbl = UILabel(frame: CGRect(x: (view.frame.width/2) - 175, y: (view.frame.height/2) + 300, width: 350, height: 250))
+        welcomeLbl.text = "A man travels the world over in search of what he needs, and returns home to find it."
+        welcomeLbl.lineBreakMode = .byWordWrapping
+        welcomeLbl.numberOfLines = 0
         welcomeLbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
-        welcomeLbl.font = UIFont(name: "AvenirNext-Bold", size: 72)
+        welcomeLbl.textAlignment = .justified
+        welcomeLbl.alpha = 0
+        welcomeLbl.font = UIFont(name: "HelveticaNeue-Italic", size: 24)
+
         return welcomeLbl
     }()
     
@@ -209,18 +218,33 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         
         return button
     }()
+    
+    func morphingDidStart(_ label: LTMorphingLabel) {
+        
+    }
     func layout() {
+        
         littleView.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(littleView)
         littleView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: -15).isActive = true
-        bottomConstraint = littleView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -32)
+        bottomConstraint = littleView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30)
         bottomConstraint.isActive = true
         littleView.heightAnchor.constraint(equalToConstant: 50).isActive = true
         littleView.widthAnchor.constraint(equalToConstant: 75).isActive = true
         
+        houseImg.translatesAutoresizingMaskIntoConstraints = false
+        littleView.addSubview(houseImg)
+        houseImg.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: +10).isActive = true
+        bottomConstraint = houseImg.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -35)
+        bottomConstraint.isActive = true
+        houseImg.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        houseImg.widthAnchor.constraint(equalToConstant: 40).isActive = true
+        
+       
+        
+        
         whiteView.translatesAutoresizingMaskIntoConstraints = false
         mapView.addSubview(whiteView)
-       
         whiteView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         bottomConstraint = whiteView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         bottomConstraint.isActive = true
@@ -228,9 +252,8 @@ class NavMapVC: UIViewController, MGLMapViewDelegate {
         whiteView.widthAnchor.constraint(equalToConstant: 500).isActive = true
         
         mapView.addSubview(toHomeButton)
-        mapView.addSubview(welcomeLbl)
         mapView.addSubview(navigateHomeButton)
-        
+       
         setHomeButton.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(setHomeButton)
         setHomeButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 60).isActive = true

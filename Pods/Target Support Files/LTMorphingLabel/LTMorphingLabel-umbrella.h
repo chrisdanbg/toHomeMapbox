@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "LTMorphingLabel.h"
 
-FOUNDATION_EXPORT double TKSubmitTransitionVersionNumber;
-FOUNDATION_EXPORT const unsigned char TKSubmitTransitionVersionString[];
+FOUNDATION_EXPORT double LTMorphingLabelVersionNumber;
+FOUNDATION_EXPORT const unsigned char LTMorphingLabelVersionString[];
 

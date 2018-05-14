@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '3118233577D4EA1E85FF4C33B83FE525'
-               BlueprintName = 'TKSubmitTransition'
+               BlueprintIdentifier = '4C69BF3EF4CE81852226B9442B0C2DF4'
+               BlueprintName = 'LTMorphingLabel'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'TKSubmitTransition.framework'>
+               BuildableName = 'LTMorphingLabel.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

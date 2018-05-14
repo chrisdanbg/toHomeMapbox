@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>LTMorphingLabel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MapboxCoreNavigation.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -40,11 +45,6 @@
 			<false/>
 		</dict>
 		<key>Solar.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TKSubmitTransition.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
