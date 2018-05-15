@@ -9,5 +9,4 @@ target 'toHomeMapBox' do
 
   pod 'MapboxCoreNavigation', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v0.17.0-beta.1'
 pod 'MapboxNavigation', :git => 'https://github.com/mapbox/mapbox-navigation-ios.git', :tag => 'v0.17.0-beta.1'
-pod 'LTMorphingLabel'
 end

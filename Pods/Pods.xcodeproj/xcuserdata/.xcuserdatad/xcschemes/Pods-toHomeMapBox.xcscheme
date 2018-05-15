@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'BD5FF1F400503F39348290E6FCF7A101'
+               BlueprintIdentifier = '6DD2F767F2D5FEA8E0C5F05677F931EA'
                BlueprintName = 'Pods-toHomeMapBox'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods-toHomeMapBox.framework'>

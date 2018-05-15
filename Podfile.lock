@@ -1,5 +1,4 @@
 PODS:
-  - LTMorphingLabel (0.5.6)
   - Mapbox-iOS-SDK (4.0.0)
   - MapboxCoreNavigation (0.17.0-beta.1):
     - MapboxDirections.swift (~> 0.20.0)
@@ -19,7 +18,6 @@ PODS:
   - Turf (0.1.1)
 
 DEPENDENCIES:
-  - LTMorphingLabel
   - MapboxCoreNavigation (from `https://github.com/mapbox/mapbox-navigation-ios.git`, tag `v0.17.0-beta.1`)
   - MapboxNavigation (from `https://github.com/mapbox/mapbox-navigation-ios.git`, tag `v0.17.0-beta.1`)
 
@@ -40,7 +38,6 @@ CHECKOUT OPTIONS:
     :tag: v0.17.0-beta.1
 
 SPEC CHECKSUMS:
-  LTMorphingLabel: bdb51d4682e9822da89da6f567bd8aa456fd6650
   Mapbox-iOS-SDK: 271754e96eb4434ba1b0a8c68432e1ea26fe9841
   MapboxCoreNavigation: 2f84ea58a6dd555b278994c750981e32ed4cb2a9
   MapboxDirections.swift: 9a46ca0f0608c76393f392ae793459cc30aa846f
@@ -51,6 +48,6 @@ SPEC CHECKSUMS:
   Solar: 2dc6e7cc39186cb0c8228fa08df76fb50c7d8f24
   Turf: 4ace207379c8d58a8e45842755de821dac3fae72
 
-PODFILE CHECKSUM: 954df6ab70c660cd60552b86bfdb134fd4428dc7
+PODFILE CHECKSUM: 11f0616971bf1ec76c5b1050f2361ca796565745
 
 COCOAPODS: 1.4.0

@@ -1,12 +1,16 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoHomeModalVC" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NoHomeModalVC" customModule="toHomeMapBox" customModuleProvider="target">
             <connections>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -15,8 +19,56 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PF3-yS-vPa">
+                    <rect key="frame" x="67" y="223" width="240" height="220"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You havent set your Home Location !" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IPP-dJ-Ktk">
+                            <rect key="frame" x="43" y="72" width="153" height="76"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="76" id="INg-PN-PRu"/>
+                                <constraint firstAttribute="width" constant="153" id="s9u-ep-8GA"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YHx-aB-HA7">
+                            <rect key="frame" x="206" y="8" width="26" height="22"/>
+                            <inset key="imageEdgeInsets" minX="4" minY="0.0" maxX="0.0" maxY="0.0"/>
+                            <state key="normal" title="X" image="close">
+                                <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                            </state>
+                            <connections>
+                                <action selector="dissmisWasPressed:" destination="-1" eventType="touchUpInside" id="zzE-lz-JFM"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="IPP-dJ-Ktk" secondAttribute="trailing" constant="44" id="1Ef-79-0w5"/>
+                        <constraint firstAttribute="bottom" secondItem="IPP-dJ-Ktk" secondAttribute="bottom" constant="72" id="V6m-DC-Ud7"/>
+                        <constraint firstItem="IPP-dJ-Ktk" firstAttribute="leading" secondItem="PF3-yS-vPa" secondAttribute="leading" constant="43" id="Z0e-F7-tln"/>
+                        <constraint firstItem="YHx-aB-HA7" firstAttribute="top" secondItem="PF3-yS-vPa" secondAttribute="top" constant="8" id="bOF-kZ-M4e"/>
+                        <constraint firstItem="IPP-dJ-Ktk" firstAttribute="top" secondItem="PF3-yS-vPa" secondAttribute="top" constant="72" id="d0m-Wh-CnC"/>
+                        <constraint firstAttribute="width" constant="240" id="hjk-L0-m56"/>
+                        <constraint firstAttribute="height" constant="220" id="jDL-Nv-8em"/>
+                        <constraint firstAttribute="trailing" secondItem="YHx-aB-HA7" secondAttribute="trailing" constant="8" id="wJc-la-sbq"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34040560787671231" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="PF3-yS-vPa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="203" id="AP9-3L-MWp"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="PF3-yS-vPa" secondAttribute="trailing" constant="68" id="Yv1-Cs-6Oh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="PF3-yS-vPa" secondAttribute="bottom" constant="224" id="Zyo-5I-vnq"/>
+                <constraint firstItem="PF3-yS-vPa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="67" id="ce3-dc-uEE"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <point key="canvasLocation" x="33.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="close" width="14" height="14"/>
+    </resources>
 </document>

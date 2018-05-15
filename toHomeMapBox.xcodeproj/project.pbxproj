@@ -7,15 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B20022B20AAFEED00CD16D9 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20022A20AAFEED00CD16D9 /* UIRoundedButtonWithGradientAndShadow.swift */; };
+		2B20022E20AB506000CD16D9 /* NoHomeModalVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B20022C20AB506000CD16D9 /* NoHomeModalVC.swift */; };
+		2B20022F20AB506000CD16D9 /* NoHomeModalVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2B20022D20AB506000CD16D9 /* NoHomeModalVC.xib */; };
 		2BD1109F20A82AC900B62DC1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD1109E20A82AC900B62DC1 /* AppDelegate.swift */; };
 		2BD110A120A82AC900B62DC1 /* NavMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BD110A020A82AC900B62DC1 /* NavMapVC.swift */; };
 		2BD110A420A82AC900B62DC1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD110A220A82AC900B62DC1 /* Main.storyboard */; };
 		2BD110A620A82AD000B62DC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BD110A520A82AD000B62DC1 /* Assets.xcassets */; };
 		2BD110A920A82AD000B62DC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BD110A720A82AD000B62DC1 /* LaunchScreen.storyboard */; };
+		2BDAA82F20AAB84E001B7D43 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BDAA82E20AAB84E001B7D43 /* GradientView.swift */; };
 		5D6838C75FF4F7A25E947DAF /* Pods_toHomeMapBox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D276DF0D12EB9D4580E5048D /* Pods_toHomeMapBox.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2B20022A20AAFEED00CD16D9 /* UIRoundedButtonWithGradientAndShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRoundedButtonWithGradientAndShadow.swift; sourceTree = "<group>"; };
+		2B20022C20AB506000CD16D9 /* NoHomeModalVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoHomeModalVC.swift; sourceTree = "<group>"; };
+		2B20022D20AB506000CD16D9 /* NoHomeModalVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NoHomeModalVC.xib; sourceTree = "<group>"; };
 		2BD1109B20A82AC900B62DC1 /* toHomeMapBox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = toHomeMapBox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BD1109E20A82AC900B62DC1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BD110A020A82AC900B62DC1 /* NavMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavMapVC.swift; sourceTree = "<group>"; };
@@ -23,6 +30,7 @@
 		2BD110A520A82AD000B62DC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2BD110A820A82AD000B62DC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2BD110AA20A82AD000B62DC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BDAA82E20AAB84E001B7D43 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
 		7D6DE37CD4F8A82847ECD678 /* Pods-toHomeMapBox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toHomeMapBox.debug.xcconfig"; path = "Pods/Target Support Files/Pods-toHomeMapBox/Pods-toHomeMapBox.debug.xcconfig"; sourceTree = "<group>"; };
 		95D93CCCAF2815715121236B /* Pods-toHomeMapBox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-toHomeMapBox.release.xcconfig"; path = "Pods/Target Support Files/Pods-toHomeMapBox/Pods-toHomeMapBox.release.xcconfig"; sourceTree = "<group>"; };
 		D276DF0D12EB9D4580E5048D /* Pods_toHomeMapBox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_toHomeMapBox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -40,6 +48,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B20023020AB506500CD16D9 /* XIBs */ = {
+			isa = PBXGroup;
+			children = (
+				2B20022D20AB506000CD16D9 /* NoHomeModalVC.xib */,
+			);
+			path = XIBs;
+			sourceTree = "<group>";
+		};
 		2BD1109220A82AC900B62DC1 = {
 			isa = PBXGroup;
 			children = (
@@ -61,14 +77,27 @@
 		2BD1109D20A82AC900B62DC1 /* toHomeMapBox */ = {
 			isa = PBXGroup;
 			children = (
+				2B20023020AB506500CD16D9 /* XIBs */,
+				2BDAA82D20AAB83C001B7D43 /* View */,
 				2BD1109E20A82AC900B62DC1 /* AppDelegate.swift */,
 				2BD110A020A82AC900B62DC1 /* NavMapVC.swift */,
 				2BD110A220A82AC900B62DC1 /* Main.storyboard */,
 				2BD110A520A82AD000B62DC1 /* Assets.xcassets */,
 				2BD110A720A82AD000B62DC1 /* LaunchScreen.storyboard */,
 				2BD110AA20A82AD000B62DC1 /* Info.plist */,
+				2B20022C20AB506000CD16D9 /* NoHomeModalVC.swift */,
 			);
 			path = toHomeMapBox;
+			sourceTree = "<group>";
+		};
+		2BDAA82D20AAB83C001B7D43 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				2BDAA82E20AAB84E001B7D43 /* GradientView.swift */,
+				2B20022A20AAFEED00CD16D9 /* UIRoundedButtonWithGradientAndShadow.swift */,
+			);
+			name = View;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		5F83862EDF97CBCBF4ACF349 /* Pods */ = {
@@ -157,6 +186,7 @@
 			files = (
 				2BD110A920A82AD000B62DC1 /* LaunchScreen.storyboard in Resources */,
 				2BD110A620A82AD000B62DC1 /* Assets.xcassets in Resources */,
+				2B20022F20AB506000CD16D9 /* NoHomeModalVC.xib in Resources */,
 				2BD110A420A82AC900B62DC1 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -171,7 +201,6 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-toHomeMapBox/Pods-toHomeMapBox-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/LTMorphingLabel/LTMorphingLabel.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework",
 				"${PODS_ROOT}/Mapbox-iOS-SDK/dynamic/Mapbox.framework.dSYM",
 				"${BUILT_PRODUCTS_DIR}/MapboxCoreNavigation/MapboxCoreNavigation.framework",
@@ -185,7 +214,6 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LTMorphingLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework",
 				"${DWARF_DSYM_FOLDER_PATH}/Mapbox.framework.dSYM",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MapboxCoreNavigation.framework",
@@ -242,8 +270,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B20022E20AB506000CD16D9 /* NoHomeModalVC.swift in Sources */,
 				2BD110A120A82AC900B62DC1 /* NavMapVC.swift in Sources */,
 				2BD1109F20A82AC900B62DC1 /* AppDelegate.swift in Sources */,
+				2BDAA82F20AAB84E001B7D43 /* GradientView.swift in Sources */,
+				2B20022B20AAFEED00CD16D9 /* UIRoundedButtonWithGradientAndShadow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
